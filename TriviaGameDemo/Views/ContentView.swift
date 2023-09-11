@@ -8,25 +8,34 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var triviaManager = TriviaManager()
+    
     var body: some View {
-        VStack(spacing:  40) {
-            
-            VStack(spacing: 20) {
-                Text("Trivia Game")
-                    .lilacTitle()
+        NavigationView {
+            VStack(spacing:  40) {
+                VStack(spacing: 20) {
+                    Text("Trivia Game")
+                        .lilacTitle()
+                    
+                    Text("Are you ready to test out your trivia skills?")
+                        .foregroundColor(Color("AccentColor"))
+                        .fontWeight(.heavy)
+                }
                 
-                Text("Are you ready to test out your trivia skills?")
-                    .foregroundColor(Color("AccentColor"))
-                    .fontWeight(.heavy)
+                NavigationLink {
+                    TriviaView()
+                        .environmentObject(triviaManager)
+                } label: {
+                    PrimaryButton(text: "Let's Go!")
+                }
             }
             
-                PrimaryButton(text: "Let's Go!")
             
-        }
-        
-        .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .edgesIgnoringSafeArea(.all)
+            
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .edgesIgnoringSafeArea(.all)
         .background(Color(red: 0.984323725490196, green: 0.9294117647058824, blue: 0.8470588235294118))
+        }
     }
 }
 
